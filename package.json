@@ -1,6 +1,7 @@
 {
   "name": "revolut",
   "version": "0.1.0",
+  "homepage": "https://zwug.github.io/exchanger-lite",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
@@ -11,6 +12,7 @@
     "@types/react": "^17.0.17",
     "@types/react-dom": "^17.0.9",
     "antd": "^4.16.11",
+    "gh-pages": "^3.2.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -18,6 +20,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -b main -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
