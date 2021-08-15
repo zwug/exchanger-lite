@@ -1,0 +1,9 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  transform: scale(0.5);
+}
