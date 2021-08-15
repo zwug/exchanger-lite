@@ -1,4 +1,4 @@
-import { ExchangeState, InputData} from './interfaces';
+import { ExchangeState } from './interfaces';
 
 const initialState: ExchangeState = {
   from: {
