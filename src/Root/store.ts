@@ -1,16 +1,5 @@
 import { ExchangeState } from './interfaces';
 
-const initialState: ExchangeState = {
-  from: {
-    currency: 'USD',
-    amount: 0
-  },
-  to: {
-    currency: 'EUR',
-    amount: 0
-  },
-};
-
 export const CHANGE_CURRENCY_FROM = 'CHANGE_CURRENCY_FROM';
 export const CHANGE_CURRENCY_TO = 'CHANGE_CURRENCY_TO';
 export const CHANGE_AMOUNT_FROM = 'CHANGE_AMOUNT_FROM';
@@ -43,12 +32,10 @@ interface ChangeAmountToAction extends Omit<ChangeAmountFromAction, 'type'> {
 type Action = ChangeCurrencyFromAction | ChangeCurrencyToAction | ChangeAmountFromAction | ChangeAmountToAction;
 
 
-export const reducer = (state: ExchangeState = initialState, action: Action): ExchangeState => {
+export const reducer = (state: ExchangeState, action: Action): ExchangeState => {
   switch (action.type) {
     case CHANGE_CURRENCY_FROM: {
       const { currency, rate} = action.payload;
-      console.log(currency, rate);
-      
 
       return {
         from: {
@@ -58,6 +45,21 @@ export const reducer = (state: ExchangeState = initialState, action: Action): Ex
         to: {
           ...state.to,
           amount: rate * state.from.amount,
+        }
+      };
+    }
+
+    case CHANGE_CURRENCY_TO: {
+      const { currency, rate} = action.payload;      
+
+      return {
+        from: {
+          ...state.from,
+          amount: state.to.amount / rate,
+        },
+        to: {
+          ...state.to,
+          currency,
         }
       };
     }
@@ -73,6 +75,21 @@ export const reducer = (state: ExchangeState = initialState, action: Action): Ex
         to: {
           ...state.to,
           amount: rate * amount,
+        }
+      }
+    }
+
+    case CHANGE_AMOUNT_TO: {
+      const { amount, rate} = action.payload;      
+      
+      return {
+        from: {
+          ...state.from,
+          amount: rate * amount,
+        },
+        to: {
+          ...state.to,
+          amount,
         }
       }
     }

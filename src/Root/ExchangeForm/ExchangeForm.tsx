@@ -1,7 +1,7 @@
 import React, { useCallback, useReducer } from 'react';
-import { Input, Select } from 'antd';
 import { ExchangeState} from './interfaces';
 import { ExchangeData } from '../../interfaces/ExchangeData';
+import AmountControl from './AmountControl/AmountControl';
 
 import {
   CHANGE_AMOUNT_FROM,
@@ -13,11 +13,9 @@ import {
 
 import styles from './ExchangeForm.module.css';
 
-const { Option } = Select;
-
 const initialData: ExchangeState = {
   from: {
-    currency: 'USD',
+    currency: 'RUB',
     amount: 0
   },
   to: {
@@ -26,7 +24,6 @@ const initialData: ExchangeState = {
   },
 }
 
-
 export interface Props {
   exchangeData: ExchangeData,
 }
@@ -34,57 +31,63 @@ export interface Props {
 const ExchangeForm: React.FC<Props> = ({ exchangeData }) => {
   const [inputsData, dispatch] = useReducer(reducer, initialData);
 
-  const onFromAmountChange: React.ChangeEventHandler<HTMLInputElement> = useCallback((evt) => {
+  const onFromAmountChange = useCallback((amount: number) => {
     dispatch({
       type: CHANGE_AMOUNT_FROM,
       payload: {
-        amount: Number(evt.target.value),
-        rate: exchangeData.rates[inputsData.to.currency],
+        amount,
+        rate: exchangeData.rates[inputsData.to.currency] / exchangeData.rates[inputsData.from.currency],
       }
     });
   }, [inputsData, exchangeData]);
 
-  const onFromCurrencyChange = useCallback((value: string) => {    
+  const onFromCurrencyChange = useCallback((currency: string) => {    
     dispatch({
       type: CHANGE_CURRENCY_FROM,
       payload: {
-        currency: value,
-        rate: (exchangeData.rates[inputsData.to.currency]) / (exchangeData.rates[value])
+        currency: currency,
+        rate: exchangeData.rates[inputsData.to.currency] / exchangeData.rates[currency]
+      }
+    });
+  }, [inputsData.to.currency, exchangeData]);
+
+  const onToAmountChange = useCallback((amount: number) => {
+    dispatch({
+      type: CHANGE_AMOUNT_TO,
+      payload: {
+        amount,
+        rate: exchangeData.rates[inputsData.from.currency] / exchangeData.rates[inputsData.to.currency],
       }
     });
   }, [inputsData, exchangeData]);
 
+  const onToCurrencyChange = useCallback((currency: string) => {        
+    dispatch({
+      type: CHANGE_CURRENCY_TO,
+      payload: {
+        currency,
+        rate: exchangeData.rates[inputsData.from.currency] / exchangeData.rates[currency]
+      }
+    });
+  }, [exchangeData, inputsData.from.currency]);
+
   return (
     <div className={styles.root}>
-    <Input 
-      size="large"
-      type="number"
-      value={inputsData.from.amount}
-      onChange={onFromAmountChange}
-    />
-    <Select
-      value={inputsData.from.currency}
-      onChange={onFromCurrencyChange}
-    >
-      {Object.keys(exchangeData.rates).map(currencyCode => (
-        <Option key={currencyCode} value={currencyCode}>
-          {currencyCode}
-        </Option>
-      ))}
-    </Select>
-    <Input 
-      size="large"
-      value={inputsData.to.amount}
-    />
-    <Select
-      value={inputsData.to.currency}
-    >
-      {Object.keys(exchangeData.rates).map(currencyCode => (
-        <Option key={currencyCode} value={currencyCode}>
-          {currencyCode}
-        </Option>
-      ))}
-    </Select>
+      <AmountControl
+        amount={inputsData.from.amount}
+        currency={inputsData.from.currency}
+        rates={exchangeData.rates}
+        onAmountChange={onFromAmountChange}
+        onCurrencyChange={onFromCurrencyChange}
+      />
+      
+      <AmountControl
+        amount={inputsData.to.amount}
+        currency={inputsData.to.currency}
+        rates={exchangeData.rates}
+        onAmountChange={onToAmountChange}
+        onCurrencyChange={onToCurrencyChange}
+      />
   </div>
   );
 }
