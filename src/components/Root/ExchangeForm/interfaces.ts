@@ -3,7 +3,7 @@ export interface InputData {
   currency: string,
 }
 
-export interface ExchangeState {
+export interface ExchangeFormState {
   from: InputData,
   to: InputData,
 }

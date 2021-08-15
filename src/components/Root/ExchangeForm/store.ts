@@ -1,4 +1,4 @@
-import { ExchangeState } from './interfaces';
+import { ExchangeFormState } from './interfaces';
 
 export const CHANGE_CURRENCY_FROM = 'CHANGE_CURRENCY_FROM';
 export const CHANGE_CURRENCY_TO = 'CHANGE_CURRENCY_TO';
@@ -32,7 +32,7 @@ interface ChangeAmountToAction extends Omit<ChangeAmountFromAction, 'type'> {
 type Action = ChangeCurrencyFromAction | ChangeCurrencyToAction | ChangeAmountFromAction | ChangeAmountToAction;
 
 
-export const reducer = (state: ExchangeState, action: Action): ExchangeState => {
+export const reducer = (state: ExchangeFormState, action: Action): ExchangeFormState => {
   switch (action.type) {
     case CHANGE_CURRENCY_FROM: {
       const { currency, rate} = action.payload;

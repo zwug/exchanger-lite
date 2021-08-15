@@ -1,6 +1,6 @@
 import React, { useCallback, useReducer } from 'react';
-import { ExchangeState} from './interfaces';
-import { ExchangeData } from '../../interfaces/ExchangeData';
+import { ExchangeFormState} from './interfaces';
+import { ExchangeData } from '../../../interfaces/ExchangeData';
 import AmountControl from './AmountControl/AmountControl';
 
 import {
@@ -9,11 +9,11 @@ import {
   CHANGE_CURRENCY_FROM,
   CHANGE_CURRENCY_TO,
   reducer,
-} from '../store';
+} from './store';
 
 import styles from './ExchangeForm.module.css';
 
-const initialData: ExchangeState = {
+const initialData: ExchangeFormState = {
   from: {
     currency: 'RUB',
     amount: 0
@@ -45,7 +45,7 @@ const ExchangeForm: React.FC<Props> = ({ exchangeData }) => {
     dispatch({
       type: CHANGE_CURRENCY_FROM,
       payload: {
-        currency: currency,
+        currency,
         rate: exchangeData.rates[inputsData.to.currency] / exchangeData.rates[currency]
       }
     });

@@ -1,7 +1,7 @@
 import 'antd/dist/antd.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Root from './Root/Root';
+import Root from './components/Root/Root';
 
 ReactDOM.render(
   <React.StrictMode>

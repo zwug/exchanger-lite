@@ -2,7 +2,7 @@ import React, {useCallback} from 'react';
 import logoUrl from './logo.png';
 import { Spin, Space, Alert } from 'antd';
 
-import { useExchangeState } from '../hooks/useExchangeState'
+import { useExchangeState } from '../../hooks/useExchangeState'
 import ExchangeForm from './ExchangeForm/ExchangeForm';
 
 import styles from './Root.module.css';
