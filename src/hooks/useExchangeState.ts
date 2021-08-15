@@ -44,7 +44,6 @@ export const reducer = (state: ExchangeState = initialState, action: Action): Ex
       return {
         ...state,
         isLoading: false,
-        error: null,
         data,
       };
     }

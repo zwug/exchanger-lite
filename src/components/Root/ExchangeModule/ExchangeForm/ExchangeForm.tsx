@@ -1,6 +1,6 @@
 import React, { useCallback, useReducer } from 'react';
 import { ExchangeFormState} from './interfaces';
-import { ExchangeData } from '../../../interfaces/ExchangeData';
+import { ExchangeData } from '../../../../interfaces/ExchangeData';
 import AmountControl from './AmountControl/AmountControl';
 
 import {
@@ -10,8 +10,6 @@ import {
   CHANGE_CURRENCY_TO,
   reducer,
 } from './store';
-
-import styles from './ExchangeForm.module.css';
 
 const initialData: ExchangeFormState = {
   from: {
@@ -61,7 +59,7 @@ const ExchangeForm: React.FC<Props> = ({ exchangeData }) => {
     });
   }, [inputsData, exchangeData]);
 
-  const onToCurrencyChange = useCallback((currency: string) => {        
+  const onToCurrencyChange = useCallback((currency: string) => {            
     dispatch({
       type: CHANGE_CURRENCY_TO,
       payload: {
@@ -72,7 +70,7 @@ const ExchangeForm: React.FC<Props> = ({ exchangeData }) => {
   }, [exchangeData, inputsData.from.currency]);
 
   return (
-    <div className={styles.root}>
+    <div data-testid='form'>
       <AmountControl
         amount={inputsData.from.amount}
         currency={inputsData.from.currency}

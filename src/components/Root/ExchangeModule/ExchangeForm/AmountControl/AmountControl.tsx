@@ -1,8 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { Input, Select } from 'antd';
 
-// import styles from './AmountControl.module.css';
-
 const { Option } = Select;
 
 export interface Props {

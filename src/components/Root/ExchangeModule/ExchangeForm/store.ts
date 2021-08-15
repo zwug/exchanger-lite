@@ -55,7 +55,7 @@ export const reducer = (state: ExchangeFormState, action: Action): ExchangeFormS
       return {
         from: {
           ...state.from,
-          amount: state.to.amount / rate,
+          amount: state.to.amount * rate,
         },
         to: {
           ...state.to,

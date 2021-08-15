@@ -26,7 +26,6 @@ const parseExchangeData = (dataRaw: unknown): ExchangeData => {
   }
 }
 
-// @TODO errors
 export const fetchExchangeRates = () =>
   fetch(`${OPEN_EXHANGE_RATES_ENDPOINT}?app_id=${OPEN_EXHANGE_RATES_APP_ID}&base=${OPEN_EXHANGE_RATES_BASE}`)
     .then(res => res.json())
