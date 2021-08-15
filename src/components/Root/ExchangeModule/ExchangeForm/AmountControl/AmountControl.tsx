@@ -27,6 +27,18 @@ const AmountControl: React.FC<Props> = ({
 }) => {
   const [amount, setAmount] = useState(formatAmount(amountProp));
 
+  const onFocus = useCallback(() => {
+    if (amountProp === 0) {
+      setAmount('');
+    }
+  }, [amountProp]);
+
+  const onBlur = useCallback(() => {
+    if (amountProp === 0) {
+      setAmount('0');
+    }
+  }, [amountProp]);
+
   useEffect(() => {
     if (amount === '' && amountProp === 0) {
       return;
@@ -57,10 +69,12 @@ const AmountControl: React.FC<Props> = ({
     <div>
       <Input 
         addonAfter={SelectAddon}
+        onBlur={onBlur}
+        onChange={onAmountInputChange}
+        onFocus={onFocus}
         size="large"
         type="number"
         value={amount}
-        onChange={onAmountInputChange}
       />
     </div>
   );
