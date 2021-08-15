@@ -80,7 +80,7 @@ const ExchangeForm: React.FC<Props> = ({ exchangeData }) => {
         onAmountChange={onFromAmountChange}
         onCurrencyChange={onFromCurrencyChange}
       />
-      
+      <br/>
       <AmountControl
         amount={inputsData.to.amount}
         currency={inputsData.to.currency}

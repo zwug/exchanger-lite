@@ -21,7 +21,7 @@ const Root: React.FC = () => {
       }
   
       return (
-        <Alert message="Error Text" type="error" />
+        <Alert message="Couldn't load the exchange rates" type="error" />
       )
     }
 

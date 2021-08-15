@@ -6,7 +6,6 @@ const RATES_REFRESH_INTERVAL = 10000; // 10 seconds
 
 const initialState: ExchangeState = {
   data: null,
-  error: null,
   isLoading: false,
 };
 
@@ -27,9 +26,6 @@ interface ExchangeRatesLoadSuccessAction {
 
 interface ExchangeRatesLoadErrorAction {
   type: typeof EXCHANGE_RATES_LOAD_ERROR,
-  payload: {
-    error: string,
-  }
 }
 
 type Action = ExchangeRatesLoadErrorAction | ExchangeRatesLoadSuccessAction | ExchangeRatesLoadStartAction;
@@ -53,15 +49,11 @@ export const reducer = (state: ExchangeState = initialState, action: Action): Ex
       };
     }
 
-    case EXCHANGE_RATES_LOAD_ERROR: {
-      const { error } = action.payload;
-      
+    case EXCHANGE_RATES_LOAD_ERROR:      
       return {
         ...state,
         isLoading: false,
-        error,
       };
-    }
 
     default:
       return state;
@@ -88,9 +80,6 @@ export const useExchangeState = () => {
       .catch(() => {
         dispatch({
           type: EXCHANGE_RATES_LOAD_ERROR,
-          payload: {
-            error: 'unknown', // @TODO
-          }
         });
       })
   }, []);
