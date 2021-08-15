@@ -14,7 +14,7 @@ const mockData: ExchangeData = {
   timestamp: 100,
 }
 
-test('calling render with the same component on the same container does not remount', () => {
+test('ExchangeModule renders correct elements depending on props', () => {
   const {rerender, container} = render(<ExchangeModule data={null} isLoading={false} />)
   expect(screen.getByText('Couldn\'t load the exchange rates')).toBeInTheDocument()
   expect(container.querySelectorAll('.ant-spin')).toHaveLength(0);
