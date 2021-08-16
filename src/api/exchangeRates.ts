@@ -1,7 +1,7 @@
 import { parseObject, parseNumber, parseString } from "../utils/typeChecks";
 import { Rates, ExchangeData } from "../interfaces/ExchangeData";
 
-const OPEN_EXHANGE_RATES_APP_ID = 'fbdbdfe6ab5b428da5b022ea07a796c3';
+const OPEN_EXHANGE_RATES_APP_ID = '36f4f4c6bd2341dba34fb5cc0b1c70cf';
 const OPEN_EXHANGE_RATES_BASE = 'USD';
 const OPEN_EXHANGE_RATES_ENDPOINT = 'https://openexchangerates.org/api/latest.json';
 
